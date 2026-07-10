@@ -666,431 +666,432 @@ Image Size : **299 × 299**
 Classes : **Male • Female**
 
 """)
-# ============================================
-# DASHBOARD
-# ============================================
-
-st.write("")
-st.markdown("---")
-st.write("")
-
-st.markdown("""
-<h2 style='text-align:center;color:white;'>
-📊 AI Dashboard
-</h2>
-""", unsafe_allow_html=True)
-
-# ============================================
-# METRIC CARDS
-# ============================================
-
-c1, c2, c3, c4 = st.columns(4)
-
-with c1:
-    st.markdown(f"""
-    <div style="
-    background:linear-gradient(135deg,#2563eb,#1d4ed8);
-    padding:25px;
-    border-radius:18px;
-    text-align:center;
-    color:white;
-    box-shadow:0px 10px 25px rgba(0,0,0,.3);
-    ">
-    <h1>🎯</h1>
-    <h2>{label}</h2>
-    <p>Prediction</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with c2:
-    st.markdown(f"""
-    <div style="
-    background:linear-gradient(135deg,#7c3aed,#6d28d9);
-    padding:25px;
-    border-radius:18px;
-    text-align:center;
-    color:white;
-    box-shadow:0px 10px 25px rgba(0,0,0,.3);
-    ">
-    <h1>🧠</h1>
-    <h2>{confidence_percent:.2f}%</h2>
-    <p>Confidence</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with c3:
-    st.markdown(f"""
-    <div style="
-    background:linear-gradient(135deg,#0891b2,#06b6d4);
-    padding:25px;
-    border-radius:18px;
-    text-align:center;
-    color:white;
-    box-shadow:0px 10px 25px rgba(0,0,0,.3);
-    ">
-    <h1>⚡</h1>
-    <h2>{inference_time:.3f}s</h2>
-    <p>Prediction Time</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with c4:
+if analyze and uploaded_file is not None:    
+    # ============================================
+    # DASHBOARD
+    # ============================================
+    
+    st.write("")
+    st.markdown("---")
+    st.write("")
+    
     st.markdown("""
-    <div style="
-    background:linear-gradient(135deg,#16a34a,#22c55e);
-    padding:25px;
-    border-radius:18px;
-    text-align:center;
-    color:white;
-    box-shadow:0px 10px 25px rgba(0,0,0,.3);
-    ">
-    <h1>🤖</h1>
-    <h2>CNN</h2>
-    <p>Deep Learning</p>
-    </div>
+    <h2 style='text-align:center;color:white;'>
+    📊 AI Dashboard
+    </h2>
     """, unsafe_allow_html=True)
-
-st.write("")
-st.write("")
-
-# ============================================
-# TWO COLUMN LAYOUT
-# ============================================
-
-left, right = st.columns([1.2, 1])
-
-# ============================================
-# MODEL INFORMATION
-# ============================================
-
-with left:
-
-    st.markdown("""
-    <div class="glass">
-    <h2>🧬 Model Information</h2>
-    </div>
-    """, unsafe_allow_html=True)
-
-    info1, info2 = st.columns(2)
-
-    with info1:
-
-        st.metric("Framework", "TensorFlow")
-
-        st.metric("Architecture", "CNN")
-
+    
+    # ============================================
+    # METRIC CARDS
+    # ============================================
+    
+    c1, c2, c3, c4 = st.columns(4)
+    
+    with c1:
+        st.markdown(f"""
+        <div style="
+        background:linear-gradient(135deg,#2563eb,#1d4ed8);
+        padding:25px;
+        border-radius:18px;
+        text-align:center;
+        color:white;
+        box-shadow:0px 10px 25px rgba(0,0,0,.3);
+        ">
+        <h1>🎯</h1>
+        <h2>{label}</h2>
+        <p>Prediction</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with c2:
+        st.markdown(f"""
+        <div style="
+        background:linear-gradient(135deg,#7c3aed,#6d28d9);
+        padding:25px;
+        border-radius:18px;
+        text-align:center;
+        color:white;
+        box-shadow:0px 10px 25px rgba(0,0,0,.3);
+        ">
+        <h1>🧠</h1>
+        <h2>{confidence_percent:.2f}%</h2>
+        <p>Confidence</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with c3:
+        st.markdown(f"""
+        <div style="
+        background:linear-gradient(135deg,#0891b2,#06b6d4);
+        padding:25px;
+        border-radius:18px;
+        text-align:center;
+        color:white;
+        box-shadow:0px 10px 25px rgba(0,0,0,.3);
+        ">
+        <h1>⚡</h1>
+        <h2>{inference_time:.3f}s</h2>
+        <p>Prediction Time</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with c4:
+        st.markdown("""
+        <div style="
+        background:linear-gradient(135deg,#16a34a,#22c55e);
+        padding:25px;
+        border-radius:18px;
+        text-align:center;
+        color:white;
+        box-shadow:0px 10px 25px rgba(0,0,0,.3);
+        ">
+        <h1>🤖</h1>
+        <h2>CNN</h2>
+        <p>Deep Learning</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.write("")
+    st.write("")
+    
+    # ============================================
+    # TWO COLUMN LAYOUT
+    # ============================================
+    
+    left, right = st.columns([1.2, 1])
+    
+    # ============================================
+    # MODEL INFORMATION
+    # ============================================
+    
+    with left:
+    
+        st.markdown("""
+        <div class="glass">
+        <h2>🧬 Model Information</h2>
+        </div>
+        """, unsafe_allow_html=True)
+    
+        info1, info2 = st.columns(2)
+    
+        with info1:
+    
+            st.metric("Framework", "TensorFlow")
+    
+            st.metric("Architecture", "CNN")
+    
+            st.metric("Classes", "2")
+    
+            st.metric("Input Size", "299×299")
+    
+        with info2:
+    
+            st.metric("Image Type", "RGB")
+    
+            st.metric("Normalization", "255")
+    
+            st.metric("Output", "Sigmoid")
+    
+            st.metric("Prediction", "Binary")
+    
+    # ============================================
+    # DATASET PANEL
+    # ============================================
+    
+    with right:
+    
+        st.markdown("""
+        <div class="glass">
+        <h2>📚 Dataset</h2>
+        </div>
+        """, unsafe_allow_html=True)
+    
+        st.success("✔ Male Eye Images")
+    
+        st.success("✔ Female Eye Images")
+    
+        st.info("✔ Binary Classification")
+    
+        st.info("✔ CNN Training")
+    
         st.metric("Classes", "2")
-
-        st.metric("Input Size", "299×299")
-
-    with info2:
-
-        st.metric("Image Type", "RGB")
-
-        st.metric("Normalization", "255")
-
-        st.metric("Output", "Sigmoid")
-
-        st.metric("Prediction", "Binary")
-
-# ============================================
-# DATASET PANEL
-# ============================================
-
-with right:
-
+    
+        st.metric("Model", "model.keras")
+    
+    st.write("")
+    st.write("")
+    
+    # ============================================
+    # CONFIDENCE VISUALIZATION
+    # ============================================
+    
     st.markdown("""
     <div class="glass">
-    <h2>📚 Dataset</h2>
+    <h2 align="center">📈 Confidence Visualization</h2>
     </div>
     """, unsafe_allow_html=True)
-
-    st.success("✔ Male Eye Images")
-
-    st.success("✔ Female Eye Images")
-
-    st.info("✔ Binary Classification")
-
-    st.info("✔ CNN Training")
-
-    st.metric("Classes", "2")
-
-    st.metric("Model", "model.keras")
-
-st.write("")
-st.write("")
-
-# ============================================
-# CONFIDENCE VISUALIZATION
-# ============================================
-
-st.markdown("""
-<div class="glass">
-<h2 align="center">📈 Confidence Visualization</h2>
-</div>
-""", unsafe_allow_html=True)
-
-male_col, female_col = st.columns(2)
-
-with male_col:
-
-    st.write("### 👨 Male")
-
-    st.progress(male_prob/100)
-
-    st.markdown(f"""
-    <h2 style='color:#60a5fa'>
-    {male_prob:.2f}%
-    </h2>
-    """, unsafe_allow_html=True)
-
-with female_col:
-
-    st.write("### 👩 Female")
-
-    st.progress(female_prob/100)
-
-    st.markdown(f"""
-    <h2 style='color:#ec4899'>
-    {female_prob:.2f}%
-    </h2>
-    """, unsafe_allow_html=True)
-
-st.write("")
-st.write("")
-
-# ============================================
-# AI STATUS
-# ============================================
-
-if confidence_percent >= 95:
-
-    st.success("🟢 AI is extremely confident about this prediction.")
-
-elif confidence_percent >= 85:
-
-    st.info("🔵 AI has high confidence in this prediction.")
-
-elif confidence_percent >= 70:
-
-    st.warning("🟡 Prediction is moderately confident.")
-
-else:
-
-    st.error("🔴 Confidence is low. Try another eye image.")
-# ============================================
-# AI INSIGHTS
-# ============================================
-
-st.write("")
-st.markdown("---")
-st.write("")
-
-st.markdown("""
-<h2 style='text-align:center;color:white;'>
-🧠 AI Insights
-</h2>
-""", unsafe_allow_html=True)
-
-left, right = st.columns(2)
-
-# ---------------------------------------------------
-# WHY THIS PREDICTION
-# ---------------------------------------------------
-
-with left:
-
-    st.markdown("""
-    <div class="glass">
-    <h2>🔍 Why this prediction?</h2>
-    </div>
-    """, unsafe_allow_html=True)
-
+    
+    male_col, female_col = st.columns(2)
+    
+    with male_col:
+    
+        st.write("### 👨 Male")
+    
+        st.progress(male_prob/100)
+    
+        st.markdown(f"""
+        <h2 style='color:#60a5fa'>
+        {male_prob:.2f}%
+        </h2>
+        """, unsafe_allow_html=True)
+    
+    with female_col:
+    
+        st.write("### 👩 Female")
+    
+        st.progress(female_prob/100)
+    
+        st.markdown(f"""
+        <h2 style='color:#ec4899'>
+        {female_prob:.2f}%
+        </h2>
+        """, unsafe_allow_html=True)
+    
+    st.write("")
+    st.write("")
+    
+    # ============================================
+    # AI STATUS
+    # ============================================
+    
     if confidence_percent >= 95:
-
-        st.success("""
-The CNN found highly discriminative eye features.
-
-✔ Strong edge patterns
-
-✔ Clear iris & eyelid structure
-
-✔ High feature confidence
-""")
-
+    
+        st.success("🟢 AI is extremely confident about this prediction.")
+    
     elif confidence_percent >= 85:
-
-        st.info("""
-The CNN confidently identified the eye.
-
-Minor uncertainty exists but prediction is reliable.
-""")
-
+    
+        st.info("🔵 AI has high confidence in this prediction.")
+    
+    elif confidence_percent >= 70:
+    
+        st.warning("🟡 Prediction is moderately confident.")
+    
     else:
-
-        st.warning("""
-Prediction confidence is lower.
-
-Try uploading:
-
-• Better lighting
-
-• Higher resolution
-
-• Clearly visible eye
-""")
-
-# ---------------------------------------------------
-# MODEL HIGHLIGHTS
-# ---------------------------------------------------
-
-with right:
-
+    
+        st.error("🔴 Confidence is low. Try another eye image.")
+    # ============================================
+    # AI INSIGHTS
+    # ============================================
+    
+    st.write("")
+    st.markdown("---")
+    st.write("")
+    
+    st.markdown("""
+    <h2 style='text-align:center;color:white;'>
+    🧠 AI Insights
+    </h2>
+    """, unsafe_allow_html=True)
+    
+    left, right = st.columns(2)
+    
+    # ---------------------------------------------------
+    # WHY THIS PREDICTION
+    # ---------------------------------------------------
+    
+    with left:
+    
+        st.markdown("""
+        <div class="glass">
+        <h2>🔍 Why this prediction?</h2>
+        </div>
+        """, unsafe_allow_html=True)
+    
+        if confidence_percent >= 95:
+    
+            st.success("""
+    The CNN found highly discriminative eye features.
+    
+    ✔ Strong edge patterns
+    
+    ✔ Clear iris & eyelid structure
+    
+    ✔ High feature confidence
+    """)
+    
+        elif confidence_percent >= 85:
+    
+            st.info("""
+    The CNN confidently identified the eye.
+    
+    Minor uncertainty exists but prediction is reliable.
+    """)
+    
+        else:
+    
+            st.warning("""
+    Prediction confidence is lower.
+    
+    Try uploading:
+    
+    • Better lighting
+    
+    • Higher resolution
+    
+    • Clearly visible eye
+    """)
+    
+    # ---------------------------------------------------
+    # MODEL HIGHLIGHTS
+    # ---------------------------------------------------
+    
+    with right:
+    
+        st.markdown("""
+        <div class="glass">
+        <h2>🏆 Model Highlights</h2>
+        </div>
+        """, unsafe_allow_html=True)
+    
+        st.markdown("""
+    ✅ Convolutional Neural Network
+    
+    ✅ Binary Image Classification
+    
+    ✅ TensorFlow / Keras
+    
+    ✅ Fast Inference
+    
+    ✅ Real-time Prediction
+    
+    ✅ Streamlit Deployment
+    """)
+    
+    # ============================================
+    # PERFORMANCE
+    # ============================================
+    
+    st.write("")
+    st.write("")
+    
     st.markdown("""
     <div class="glass">
-    <h2>🏆 Model Highlights</h2>
+    <h2 align="center">
+    ⚡ Performance Summary
+    </h2>
     </div>
     """, unsafe_allow_html=True)
-
+    
+    perf1, perf2, perf3 = st.columns(3)
+    
+    with perf1:
+    
+        st.metric(
+            "Prediction Time",
+            f"{inference_time:.3f}s"
+        )
+    
+    with perf2:
+    
+        st.metric(
+            "Confidence",
+            f"{confidence_percent:.2f}%"
+        )
+    
+    with perf3:
+    
+        st.metric(
+            "Model",
+            "CNN"
+        )
+    
+    # ============================================
+    # USER TIPS
+    # ============================================
+    
+    st.write("")
+    st.write("")
+    
     st.markdown("""
-✅ Convolutional Neural Network
-
-✅ Binary Image Classification
-
-✅ TensorFlow / Keras
-
-✅ Fast Inference
-
-✅ Real-time Prediction
-
-✅ Streamlit Deployment
-""")
-
-# ============================================
-# PERFORMANCE
-# ============================================
-
-st.write("")
-st.write("")
-
-st.markdown("""
-<div class="glass">
-<h2 align="center">
-⚡ Performance Summary
-</h2>
-</div>
-""", unsafe_allow_html=True)
-
-perf1, perf2, perf3 = st.columns(3)
-
-with perf1:
-
-    st.metric(
-        "Prediction Time",
-        f"{inference_time:.3f}s"
-    )
-
-with perf2:
-
-    st.metric(
-        "Confidence",
-        f"{confidence_percent:.2f}%"
-    )
-
-with perf3:
-
-    st.metric(
-        "Model",
-        "CNN"
-    )
-
-# ============================================
-# USER TIPS
-# ============================================
-
-st.write("")
-st.write("")
-
-st.markdown("""
-<div class="glass">
-<h2>💡 Tips for Better Prediction</h2>
-</div>
-""", unsafe_allow_html=True)
-
-st.info("""
-✔ Upload only one eye.
-
-✔ Avoid blurry images.
-
-✔ Ensure good lighting.
-
-✔ Crop unnecessary background.
-
-✔ Use JPG or PNG images.
-""")
-
-# ============================================
-# TECHNOLOGY BADGES
-# ============================================
-
-st.write("")
-st.write("")
-
-st.markdown("""
-<h2 style='text-align:center;color:white;'>
-🚀 Built With
-</h2>
-""", unsafe_allow_html=True)
-
-b1,b2,b3,b4 = st.columns(4)
-
-with b1:
-    st.success("🐍 Python")
-
-with b2:
-    st.success("🧠 TensorFlow")
-
-with b3:
-    st.success("⚡ Streamlit")
-
-with b4:
-    st.success("📷 CNN")
-
-# ============================================
-# FOOTER
-# ============================================
-
-st.write("")
-st.markdown("---")
-
-st.markdown("""
-<div style='
-text-align:center;
-padding:30px;
-background:rgba(255,255,255,.06);
-border-radius:20px;
-'>
-
-<h2>👁️ Male vs Female Eye Classifier</h2>
-
-<p>
-Deep Learning • CNN • TensorFlow • Streamlit
-</p>
-
-<br>
-
-Developed by
-
-<h3 style='color:#60a5fa;'>
-Anushka Singh
-</h3>
-
-<p>
-Built with ❤️ using Artificial Intelligence
-</p>
-
-</div>
-""", unsafe_allow_html=True)    
+    <div class="glass">
+    <h2>💡 Tips for Better Prediction</h2>
+    </div>
+    """, unsafe_allow_html=True)
     
+    st.info("""
+    ✔ Upload only one eye.
     
-
+    ✔ Avoid blurry images.
+    
+    ✔ Ensure good lighting.
+    
+    ✔ Crop unnecessary background.
+    
+    ✔ Use JPG or PNG images.
+    """)
+    
+    # ============================================
+    # TECHNOLOGY BADGES
+    # ============================================
+    
+    st.write("")
+    st.write("")
+    
+    st.markdown("""
+    <h2 style='text-align:center;color:white;'>
+    🚀 Built With
+    </h2>
+    """, unsafe_allow_html=True)
+    
+    b1,b2,b3,b4 = st.columns(4)
+    
+    with b1:
+        st.success("🐍 Python")
+    
+    with b2:
+        st.success("🧠 TensorFlow")
+    
+    with b3:
+        st.success("⚡ Streamlit")
+    
+    with b4:
+        st.success("📷 CNN")
+    
+    # ============================================
+    # FOOTER
+    # ============================================
+    
+    st.write("")
+    st.markdown("---")
+    
+    st.markdown("""
+    <div style='
+    text-align:center;
+    padding:30px;
+    background:rgba(255,255,255,.06);
+    border-radius:20px;
+    '>
+    
+    <h2>👁️ Male vs Female Eye Classifier</h2>
+    
+    <p>
+    Deep Learning • CNN • TensorFlow • Streamlit
+    </p>
+    
+    <br>
+    
+    Developed by
+    
+    <h3 style='color:#60a5fa;'>
+    Anushka Singh
+    </h3>
+    
+    <p>
+    Built by ANUSHKA ⭐ using Artificial Intelligence
+    </p>
+    
+    </div>
+    """, unsafe_allow_html=True)    
+        
+        
+    

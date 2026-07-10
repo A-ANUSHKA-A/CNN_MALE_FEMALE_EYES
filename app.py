@@ -478,7 +478,7 @@ if analyze and uploaded_file is not None:
     st.success("✅ Image processed successfully.")
 
     # Prediction comes in Part 3
- # =====================================
+# =====================================
 # PREDICTION
 # =====================================
 
@@ -666,7 +666,7 @@ Image Size : **299 × 299**
 Classes : **Male • Female**
 
 """)
- # ============================================
+# ============================================
 # DASHBOARD
 # ============================================
 
@@ -878,7 +878,7 @@ elif confidence_percent >= 70:
 else:
 
     st.error("🔴 Confidence is low. Try another eye image.")
- # ============================================
+# ============================================
 # AI INSIGHTS
 # ============================================
 
@@ -1090,4 +1090,7 @@ Built with ❤️ using Artificial Intelligence
 </p>
 
 </div>
-""", unsafe_allow_html=True)
+""", unsafe_allow_html=True)    
+    
+    
+

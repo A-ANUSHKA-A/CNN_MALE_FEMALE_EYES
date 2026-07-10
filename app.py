@@ -3,135 +3,232 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 
-# -----------------------
-# Page Config
-# -----------------------
+# -----------------------------
+# Page Configuration
+# -----------------------------
 st.set_page_config(
     page_title="Male vs Female Eye Classifier",
     page_icon="👁️",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
-# -----------------------
-# Custom CSS
-# -----------------------
-st.markdown("""
-<style>
-
-.main{
-background:linear-gradient(135deg,#141E30,#243B55);
-}
-
-.title{
-text-align:center;
-font-size:45px;
-font-weight:bold;
-color:white;
-}
-
-.subtitle{
-text-align:center;
-font-size:18px;
-color:#d6d6d6;
-margin-bottom:25px;
-}
-
-.result{
-padding:20px;
-border-radius:15px;
-background:#ffffff20;
-text-align:center;
-font-size:28px;
-font-weight:bold;
-color:white;
-}
-
-.stButton>button{
-width:100%;
-background:#00B4DB;
-background:linear-gradient(to right,#0083B0,#00B4DB);
-color:white;
-font-size:18px;
-border-radius:12px;
-height:55px;
-}
-
-</style>
-""", unsafe_allow_html=True)
-
-# -----------------------
+# -----------------------------
 # Load Model
-# -----------------------
+# -----------------------------
 @st.cache_resource
 def load_model():
     return tf.keras.models.load_model("model.keras")
 
 model = load_model()
 
-# -----------------------
-# Header
-# -----------------------
-st.markdown("<div class='title'>👁️ Male vs Female Eye Classifier</div>",
-unsafe_allow_html=True)
+# -----------------------------
+# Custom CSS
+# -----------------------------
+st.markdown("""
+<style>
 
-st.markdown("<div class='subtitle'>Deep Learning | CNN | Streamlit</div>",
-unsafe_allow_html=True)
+.stApp{
+    background: linear-gradient(135deg,#0f172a,#1e293b,#111827);
+}
 
-left,right=st.columns([1,1])
+.hero{
+    background: linear-gradient(90deg,#2563eb,#7c3aed);
+    padding:35px;
+    border-radius:20px;
+    text-align:center;
+    color:white;
+    box-shadow:0px 8px 25px rgba(0,0,0,0.3);
+}
+
+.hero h1{
+    font-size:52px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    font-size:20px;
+}
+
+.card{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter: blur(15px);
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+.result-card{
+    background:linear-gradient(135deg,#2563eb,#06b6d4);
+    color:white;
+    border-radius:20px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0px 8px 25px rgba(0,0,0,.3);
+}
+
+.metric{
+    font-size:45px;
+    font-weight:bold;
+}
+
+footer{
+visibility:hidden;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+# -----------------------------
+# Sidebar
+# -----------------------------
+with st.sidebar:
+
+    st.title("👁️ About")
+
+    st.info("""
+This application predicts whether an eye image belongs to a **Male** or **Female** using a Convolutional Neural Network.
+
+### Model
+- CNN
+- TensorFlow/Keras
+
+### Input
+- JPG
+- JPEG
+- PNG
+
+### Output
+- Predicted Gender
+- Confidence Score
+""")
+
+    st.success("Developed using Streamlit")
+
+# -----------------------------
+# Hero Section
+# -----------------------------
+st.markdown("""
+<div class='hero'>
+<h1>👁️ Male vs Female Eye Classifier</h1>
+<p>Deep Learning • CNN • TensorFlow • Streamlit</p>
+</div>
+""", unsafe_allow_html=True)
+
+st.write("")
+
+# -----------------------------
+# Layout
+# -----------------------------
+left,right = st.columns([1,1])
+
+uploaded = None
 
 with left:
 
-    uploaded=st.file_uploader(
-        "Upload Eye Image",
+    st.markdown("<div class='card'>", unsafe_allow_html=True)
+
+    st.subheader("📂 Upload Eye Image")
+
+    uploaded = st.file_uploader(
+        "",
         type=["jpg","jpeg","png"]
     )
 
+    st.markdown("</div>", unsafe_allow_html=True)
+
 with right:
 
-    if uploaded is not None:
+    st.markdown("<div class='card'>", unsafe_allow_html=True)
 
-        image=Image.open(uploaded).convert("RGB")
+    st.subheader("🖼️ Image Preview")
+
+    if uploaded:
+
+        image = Image.open(uploaded).convert("RGB")
 
         st.image(image,use_container_width=True)
 
-        img=image.resize((299,299))      # Change if needed
+    else:
 
-        img=np.array(img)/255.0
+        st.info("Upload an eye image to preview.")
 
-        img=np.expand_dims(img,axis=0)
+    st.markdown("</div>", unsafe_allow_html=True)
 
-        if st.button("🔍 Predict"):
+# -----------------------------
+# Prediction
+# -----------------------------
+if uploaded:
 
-            with st.spinner("Analyzing..."):
+    image = Image.open(uploaded).convert("RGB")
 
-                pred=model.predict(img)
+    img = image.resize((299,299))      # Change if required
 
-                probability=float(pred[0][0])
+    img = np.array(img)/255.0
 
-                if probability>0.5:
-                    label="👨 Male Eye"
-                    confidence=probability*100
-                else:
-                    label="👩 Female Eye"
-                    confidence=(1-probability)*100
+    img = np.expand_dims(img,axis=0)
 
-                st.markdown(
-                f"""
-                <div class='result'>
-                {label}<br><br>
-                Confidence : {confidence:.2f}%
-                </div>
-                """,
-                unsafe_allow_html=True)
+    st.write("")
 
-                st.progress(confidence/100)
+    if st.button("🚀 Analyze Image",use_container_width=True):
 
-                st.write("### Prediction Scores")
+        with st.spinner("Analyzing..."):
 
-                st.write({
-                    "Male":round(probability,3),
-                    "Female":round(1-probability,3)
-                })
+            pred = model.predict(img)
 
-st.markdown("---")
-st.caption("Made ANUSHKA ⭐using TensorFlow and Streamlit")
+        probability = float(pred[0][0])
+
+        if probability >= 0.5:
+
+            label = "👨 Male Eye"
+
+            confidence = probability
+
+        else:
+
+            label = "👩 Female Eye"
+
+            confidence = 1-probability
+
+        st.write("")
+
+        st.markdown(f"""
+        <div class='result-card'>
+            <h2>Prediction Result</h2>
+            <div class='metric'>{label}</div>
+            <h3>Confidence : {confidence*100:.2f}%</h3>
+        </div>
+        """,unsafe_allow_html=True)
+
+        st.write("")
+
+        st.subheader("📊 Confidence")
+
+        st.progress(float(confidence))
+
+        male_prob = probability
+        female_prob = 1-probability
+
+        st.subheader("📈 Prediction Probability")
+
+        st.bar_chart({
+            "Probability":[male_prob,female_prob]
+        })
+
+        c1,c2 = st.columns(2)
+
+        c1.metric("👨 Male",f"{male_prob*100:.2f}%")
+        c2.metric("👩 Female",f"{female_prob*100:.2f}%")
+
+st.write("")
+st.write("---")
+
+st.markdown(
+"""
+<center>
+<h4>✨ Built with TensorFlow • Keras • Streamlit</h4>
+Made by <b>Anushka Singh</b> 💙
+</center>
+""",
+unsafe_allow_html=True
+)
